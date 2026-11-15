@@ -18,7 +18,35 @@ const OG_ALT = 'Metem Labs. Building the Bricks of the Digital Mind.';
 const ORG = { '@type': 'ResearchOrganization', name: 'Metem Labs', url: `${SITE}/`, logo: `${SITE}/favicon-512x512.png`, email: CONTACT };
 const jsonLd = (o) => `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', ...o }).replace(/</g, '\\u003c')}</script>`;
 
-const page = ({ title, description, url, body, ld, type = 'website' }) => `<!doctype html>
+// Header: same as metem.org's (SharedHeader + MenuPanel), without Donate.
+// Desktop (> 900px): logo | Publications  Contact. At or below 900px:
+// a MENU/CLOSE button and its dropdown panel.
+const NAV = [
+  { label: 'Publications', href: '/publications/' },
+  { label: 'Contact', href: `mailto:${CONTACT}` },
+];
+const header = (current) => {
+  const link = (cls) => (p) => `<a class="${cls}${p.href === current ? ' on' : ''}" href="${p.href}"${p.href === current ? ' aria-current="page"' : ''}>${p.label}</a>`;
+  return `<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a class="logo" href="/" aria-label="Metem Labs — home">METEM LABS</a>
+    <nav class="hdr-wide" aria-label="Main"><span class="hdr-sep" aria-hidden="true"></span>${NAV.map(link('hdr-link')).join('')}</nav>
+    <button class="hdr-narrow menu-btn" id="menu-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="menu-panel"><span class="mb"><span class="mb-close">CLOSE</span><span class="mb-menu">MENU</span></span></button>
+  </div>
+</header>
+<div class="menu-wrap" id="menu-panel" hidden><div class="menu-in"><div class="menu">${NAV.map(link('menu-link')).join('')}</div></div></div>
+<script>
+(function(){var h=document.getElementById('hdr'),b=document.getElementById('menu-btn'),m=document.getElementById('menu-panel');
+function set(o){m.hidden=!o;b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Close navigation menu':'Open navigation menu');b.classList.toggle('open',o);}
+b.addEventListener('click',function(){set(m.hidden);});
+document.addEventListener('mousedown',function(e){if(!m.hidden&&!e.target.closest('#menu-btn')&&!m.querySelector('.menu').contains(e.target))set(false);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+function sc(){h.classList.toggle('scrolled',window.scrollY>4);if(!m.hidden)set(false);}
+window.addEventListener('scroll',sc,{passive:true});sc();})();
+</script>`;
+};
+
+const page = ({ title, description, url, body, ld, type = 'website', current = null }) => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -48,12 +76,12 @@ const page = ({ title, description, url, body, ld, type = 'website' }) => `<!doc
 ${ld ? jsonLd(ld) : ''}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
+${header(current)}
 <main>
-  <a class="mark" href="/">METEM <span>LABS</span></a>
 ${body}
   <footer>Metem Labs © ${YEAR}</footer>
 </main>
@@ -101,6 +129,7 @@ write('publications/index.html', page({
   title: 'Publications — Metem Labs',
   description: 'Research reviews from Metem Labs on memory, emotion and the self: what a digital mind would have to preserve.',
   url: '/publications/',
+  current: '/publications/',
   ld: { '@type': 'CollectionPage', name: 'Publications — Metem Labs', url: `${SITE}/publications/`, publisher: ORG },
   body: `
   <h1>Publications</h1>
@@ -118,6 +147,7 @@ for (const p of pubs) {
     description: p.description.length > 160 ? p.description.slice(0, 157).replace(/\s+\S*$/, '') + '…' : p.description,
     url: `/publications/${p.slug}/`,
     type: 'article',
+    current: '/publications/',
     ld: { '@type': 'ScholarlyArticle', headline: p.title, description: p.description, datePublished: p.date.split('.').join('-'), url: `${SITE}/publications/${p.slug}/`, inLanguage: 'en', publisher: ORG, author: ORG },
     body: `
   <p class="back"><a class="pill" href="/publications/">← Publications</a></p>

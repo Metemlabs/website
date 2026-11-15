@@ -28,12 +28,28 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","headline":"Reconsolidation and the Reconstructive Nature of Memory: Implications for the Stability of Emotional Memories","description":"Consolidation theory long held that a memory trace, once stabilised by protein-synthesis-dependent processes, was resistant to disruption. The present review examines the evidence that retrieval returns consolidated memories to a labile state from which they must be…","datePublished":"2026-07-05","url":"https://metemlabs.com/publications/reconsolidation-and-reconstructive-memory/","inLanguage":"en","publisher":{"@type":"ResearchOrganization","name":"Metem Labs","url":"https://metemlabs.com/","logo":"https://metemlabs.com/favicon-512x512.png","email":"contact@metemlabs.com"},"author":{"@type":"ResearchOrganization","name":"Metem Labs","url":"https://metemlabs.com/","logo":"https://metemlabs.com/favicon-512x512.png","email":"contact@metemlabs.com"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a class="logo" href="/" aria-label="Metem Labs — home">METEM LABS</a>
+    <nav class="hdr-wide" aria-label="Main"><span class="hdr-sep" aria-hidden="true"></span><a class="hdr-link on" href="/publications/" aria-current="page">Publications</a><a class="hdr-link" href="mailto:contact@metemlabs.com">Contact</a></nav>
+    <button class="hdr-narrow menu-btn" id="menu-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="menu-panel"><span class="mb"><span class="mb-close">CLOSE</span><span class="mb-menu">MENU</span></span></button>
+  </div>
+</header>
+<div class="menu-wrap" id="menu-panel" hidden><div class="menu-in"><div class="menu"><a class="menu-link on" href="/publications/" aria-current="page">Publications</a><a class="menu-link" href="mailto:contact@metemlabs.com">Contact</a></div></div></div>
+<script>
+(function(){var h=document.getElementById('hdr'),b=document.getElementById('menu-btn'),m=document.getElementById('menu-panel');
+function set(o){m.hidden=!o;b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Close navigation menu':'Open navigation menu');b.classList.toggle('open',o);}
+b.addEventListener('click',function(){set(m.hidden);});
+document.addEventListener('mousedown',function(e){if(!m.hidden&&!e.target.closest('#menu-btn')&&!m.querySelector('.menu').contains(e.target))set(false);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+function sc(){h.classList.toggle('scrolled',window.scrollY>4);if(!m.hidden)set(false);}
+window.addEventListener('scroll',sc,{passive:true});sc();})();
+</script>
 <main>
-  <a class="mark" href="/">METEM <span>LABS</span></a>
 
   <p class="back"><a class="pill" href="/publications/">← Publications</a></p>
   <header class="pub-head"><span class="pill">2026.07.05</span><h1>Reconsolidation and the Reconstructive Nature of Memory: Implications for the Stability of Emotional Memories</h1></header>
