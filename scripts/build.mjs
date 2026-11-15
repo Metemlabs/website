@@ -29,7 +29,7 @@ const header = (current) => {
   const link = (cls) => (p) => `<a class="${cls}${p.href === current ? ' on' : ''}" href="${p.href}"${p.href === current ? ' aria-current="page"' : ''}>${p.label}</a>`;
   return `<header class="hdr" id="hdr">
   <div class="hdr-in">
-    <a class="logo" href="/" aria-label="Metem Labs — home">METEM LABS</a>
+    <a class="logo" href="/" aria-label="Metem Labs — home">METEM <span>LABS</span></a>
     <nav class="hdr-wide" aria-label="Main"><span class="hdr-sep" aria-hidden="true"></span>${NAV.map(link('hdr-link')).join('')}</nav>
     <button class="hdr-narrow menu-btn" id="menu-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="menu-panel"><span class="mb"><span class="mb-close">CLOSE</span><span class="mb-menu">MENU</span></span></button>
   </div>
@@ -104,11 +104,6 @@ write('index.html', page({
   body: `
   <h1>Building the Bricks of the Digital Mind.</h1>
 
-  <dl class="facts">
-    <div><dt>Contact</dt><dd><a class="pill" href="mailto:${CONTACT}">${CONTACT}</a></dd></div>
-    <div><dt>Publications</dt><dd><a class="pill" href="/publications/">${pubs.length} research reviews</a></dd></div>
-  </dl>
-
   <section class="box">
     <p>We are building the bricks of the digital mind: systems that (1) capture how a person feels, not just what they did or said, (2) keep what makes that person who they are, (3) predict how they would feel about situations they have never met, (4) stay faithful to the person they come from.</p>
   </section>
@@ -119,8 +114,7 @@ write('index.html', page({
     <p>We work on cognitive continuity, one brick at a time: representing how a person feels about things, learning it from real human answers, and predicting how they would feel where no answer exists yet.</p>
     <p>Every brick is measured before it is claimed.</p>
     <p>Our research also supports the Metem Foundation, which builds the open archive of human feelings: <a href="https://metem.org/">metem.org</a>.</p>
-    <p>If this vision resonates with you, write to us:</p>
-    <div class="links"><a class="pill" href="mailto:${CONTACT}">Contact</a><span class="sep"></span><a class="pill" href="/publications/">Publications</a></div>
+    <p>If this vision resonates with you, write to us: <a href="mailto:${CONTACT}">${CONTACT}</a>.</p>
   </section>`,
 }));
 
