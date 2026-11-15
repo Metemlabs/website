@@ -13,8 +13,8 @@ const pubs = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/publications.json'
 
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-const OG_IMAGE = `${SITE}/images/og.png?v=1`;
-const OG_ALT = 'Metem Labs. Building the Bricks of the Digital Mind.';
+const OG_IMAGE = `${SITE}/images/og.png?v=2`;
+const OG_ALT = 'Metem Labs. Research Toward the Digital Minds.';
 const ORG = { '@type': 'ResearchOrganization', name: 'Metem Labs', url: `${SITE}/`, logo: `${SITE}/favicon-512x512.png`, email: CONTACT };
 const jsonLd = (o) => `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', ...o }).replace(/</g, '\\u003c')}</script>`;
 
@@ -97,12 +97,12 @@ const write = (rel, html) => {
 
 // Home
 write('index.html', page({
-  title: 'Metem Labs — Building the Bricks of the Digital Mind',
+  title: 'Metem Labs — Research Toward the Digital Minds',
   description: 'Metem Labs is an R&D lab building the bricks of the digital mind: systems that carry not only what a person did and said, but how they feel.',
   url: '/',
   ld: { ...ORG, description: 'Metem Labs is an R&D lab building the bricks of the digital mind: systems that carry not only what a person did and said, but how they feel.' },
   body: `
-  <h1>Building the Bricks of the Digital Mind.</h1>
+  <h1>Research Toward the Digital Minds.</h1>
 
   <section class="box">
     <p>We are building the bricks of the digital mind: systems that (1) capture how a person feels, not just what they did or said, (2) keep what makes that person who they are, (3) predict how they would feel about situations they have never met, (4) stay faithful to the person they come from.</p>
